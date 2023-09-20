@@ -6,7 +6,7 @@ RUN apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
       gcc g++ \
       libgmp-dev \
-      libmpich-dev \
+      libopenmpi-dev \
       && \
     apt-get autoremove --purge -y && \
     apt-get autoclean -y && \
