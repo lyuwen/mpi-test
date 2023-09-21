@@ -1,6 +1,7 @@
 # vim: filetype=dockerfile
 
-FROM intel/oneapi-hpckit:2021.4-devel-ubuntu18.04 AS builder
+# FROM intel/oneapi-hpckit:2021.4-devel-ubuntu18.04 AS builder
+FROM fulvwen/intel-mpi-runtime:2021.3.0-devel AS builder
 
 RUN mkdir -p /opt/apps
 COPY src /opt/apps/src
@@ -9,7 +10,16 @@ WORKDIR /opt/apps
 RUN mpiicc -o app.x src/mpi_test.c
 
 
-FROM ghcr.io/lyuwen/intel-mpi-runtime:2021.3.0
+# FROM ghcr.io/lyuwen/intel-mpi-runtime:2021.3.0
+FROM fulvwen/intel-mpi-runtime:2021.3.0
+
+RUN apt-get update && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+      libucx-dev ucx-utils \
+      && \
+    apt-get autoremove --purge -y && \
+    apt-get autoclean -y && \
+    rm -rf /var/cache/apt/* /var/lib/apt/lists/*
 
 COPY --from=builder /opt/apps /opt/apps
 WORKDIR /opt/apps
