@@ -7,6 +7,7 @@ RUN apt-get update && \
       gcc g++ \
       libgmp-dev \
       libmpich-dev \
+      libucx-dev ucx-utils \
       && \
     apt-get autoremove --purge -y && \
     apt-get autoclean -y && \
