@@ -36,6 +36,15 @@ jobs:
       - name: Check out the repo
         uses: actions/checkout@v3
 
+      - name: run checks
+        run: |
+          whoami
+          echo 'disk usage'
+          df -h
+          echo 'details'
+          du -sch /*
+
+
       # Install the cosign tool except on PR
       # https://github.com/sigstore/cosign-installer
       - name: Install cosign
