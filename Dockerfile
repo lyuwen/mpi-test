@@ -1,6 +1,5 @@
 # vim: filetype=dockerfile
 
-# FROM fulvwen/intel-mpi-runtime:2021.3.0-devel AS builder
 FROM intel/oneapi-hpckit:2023.2.1-devel-ubuntu22.04 AS builder
 
 RUN mkdir -p /opt/apps
